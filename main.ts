@@ -6,9 +6,12 @@ input.onPinPressed(TouchPin.P1, function () {
 })
 let punten = 0
 punten = 10
+let tijd = 20
 music.startMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
 basic.forever(function () {
-    while (punten > 0) {
+    while (punten > 0 && tijd > 0) {
+        basic.pause(1000)
+        tijd += -1
         basic.showIcon(IconNames.Happy)
     }
     basic.showIcon(IconNames.No)
