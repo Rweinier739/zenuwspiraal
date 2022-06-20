@@ -1,20 +1,22 @@
+radio.onReceivedString(function (receivedString) {
+    if (receivedString == "Reset") {
+        control.reset()
+    }
+})
 input.onPinPressed(TouchPin.P1, function () {
-    basic.showIcon(IconNames.Sad)
-    music.startMelody(music.builtInMelody(Melodies.Wawawawaa), MelodyOptions.Once)
     punten += -1
-    basic.showNumber(punten)
+    radio.sendNumber(punten)
 })
 let punten = 0
+radio.setGroup(183)
 punten = 10
-let tijd = 20
+let tijd = 120
 music.startMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
 basic.forever(function () {
-    while (punten > 0 && tijd > 0) {
+    if (punten > 0 && tijd > 0) {
         basic.pause(1000)
         tijd += -1
-        basic.showIcon(IconNames.Happy)
+    } else {
+        radio.sendString("Game Over")
     }
-    basic.showIcon(IconNames.No)
-    music.startMelody(music.builtInMelody(Melodies.PowerDown), MelodyOptions.Once)
-    basic.showString("Game over")
 })
